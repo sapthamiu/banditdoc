@@ -1,5 +1,6 @@
 # banditdoc
-This repository contains writeup for helping in solving bandits by Sapthami
+This repository contains writeup for helping in solving bandits- by Sapthami
+
 ## Level 0
 `ssh` is used for remote login into a server. It can login into different port numbers deployed on a server and it will act as a client to that server.  
 `ls` shows the list of available files  
@@ -9,7 +10,8 @@ This repository contains writeup for helping in solving bandits by Sapthami
 ````
 ssh bandit0@bandit.labs.overthewire.org -p 2220  
 ls  
-cat readme
+cat readme  
+exit
 ````
 password for level 1:  
 ```
@@ -22,7 +24,8 @@ To specify that this is a filename, we put ./(dot slash) before the filename
 ```` 
 ssh bandit1@bandit.labs.overthewire.org -p 2220  
 ls  
-cat ./-  
+cat ./-
+exit
 ````
 password for level 2:  
 ````
@@ -36,6 +39,7 @@ The given filename is 'spaces in this filename', which contains spaces in betwee
 ssh bandit2@bandit.labs.overthewire.org -p 2220
 ls
 cat 'spaces in this filename'
+exit
 ````
 password for level 3:  
 ````
@@ -50,6 +54,7 @@ ls
 cd inhere
 ls -a
 cat .hidden
+exit
 ````
 password for level 4:  
 ````
@@ -68,6 +73,7 @@ ls
 cd inhere
 file ./*
 cat ./-file07
+exit
 ````
 password for level 5:
 ````
@@ -86,9 +92,58 @@ cd inhere
 ls -a
 find ! -executable -size 1033c
 file ./maybehere07/.file2
-cat ./maybehere07/,file2
+cat ./maybehere07/.file2
+exit
 ````
 password for level 6: 
 ````
 P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
 ````
+## Level 6
+The required file is somewhere in the server and owned by user bandit7, group bandit6 and is 33 bytes in size.  
+Using `find -attribute` command, we find the file.  
+Inorder to hide the 'permission denied' error messages that are displayed for files we do not have access to, we can append `2>/dev/null`.  
+### Commands:
+```
+ssh bandit6@bandit.labs.overthewire.org -p 2220
+find / -type f -user bandit7 -group bandit6 -size 33c 2>/dev/null
+cat /var/lib/dpkg/info/bandit7.password
+exit
+```
+password for level 7:
+```
+z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
+```
+## Level 7
+Password is next to the word "millionth" in the file data.txt.  
+`grep "word" filename` searches for PATTERNS in each FILE. PATTERNS is one or more patterns separated by newline characters, and grep prints each line that matches a pattern.
+### Commands:
+```
+ssh bandit7@bandit.labs.overthewire.org -p 2220
+ls
+grep "millionth" data.txt
+exit
+```
+password for level 8:
+```
+TESKZC0XvTetK0S9xNwm25STk5iWrBvP
+```
+## Level 8
+The password for the next level is stored in the file data.txt and is the only line of text that occurs only once.  
+`sort <filename>` sorts lines of the text file.  
+`uniq -u` filters adjacent duplicate lines from the file and prints only the unique lines.  
+### Commands:
+```
+ssh bandit8@bandit.labs.overthewire.org -p 2220
+ls
+sort data.txt | uniq -u
+exit
+```
+password for level 9:
+```
+EN632PlfYiZbn3PhVK3XOGSlNInNE00t
+```
+## Level 9
+The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.  
+
+
