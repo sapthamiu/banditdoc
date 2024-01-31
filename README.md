@@ -185,7 +185,97 @@ password for level 12:
 JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
 ```
 ## Level 12
-The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!)
+The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir.  
+First we make a directory '/tmp/tempo' and copy the file data.txt into the directory using `cp <source filename> <destination folder>` command.  
+Then we enter the directory using `cd <foldername>` command.  
+Then we move(rename) the file using `mv <source filename> <new filename>` command so it is easier to operate on the file contents.  
+It is said that the data is in hexdump format. To read the contents from a hexdump of a file, `xxd -r <hexdump filename> <new filename>` is used.
+Using `file` command tells that 'mycompdata' is a gzip type compressed file and 'mydata' is a text file.  
+It is said that the file is compressed repeatedly. To retrieve the text, we need to decompress repeatedly.  
+Since gzip files have the extension .gz, we rename 'mycompdata' as 'mycompdata.gz' using `mv` command.  
+`gzip -d <compressed filename>` command is used to decompress a gzip file.  
+Using `file` command again we get to know that the file has been decompressed into a bzip2 type file, so we rename the file as 'mycompdata.bz2'.  
+`bzip2 -d mycompdata.bz2` is used to decompress the bzip2 file.  
+Repeat this till we encounter a tar archive. Rename the file as 'mycompdata.tar'
+`tar -xf <filename>` is used to extract a file from a tar archive.  
+'data5.bin' is extracted, which is also a tar archive.  
+Extracting files from data5.bin using `tar` and using `file` shows that data6.bin is a bzip2 type compressed file, which should be decompressed.  
+Repeat until password is retrieved.  
+
+
+## Commands:
+```
+mkdir /tmp/tempo
+cp data.txt /tmp/tempo
+cd /tmp/tempo
+mv data.txt mydata
+xxd -r mydata mycompdata
+file *
+ls
+mv mycompdata mycompdata.gz
+gzip -d mycompdata.gz
+file *
+mv mycompdata.gz mycompdata.bz2
+bzip2 -d mycompdata.bz2
+file *
+mv mycompdata mycompdata.gz
+gzip -d mycompdata.gz
+file *
+mv mycompdata mycompdata.tar
+tar -xf mycompdata.tar
+ls
+file *
+tar -xf data5.bin
+ls
+file *
+mv data6.bin data6.bin.bz2
+file *
+tar -xf data6.bin
+ls
+file *
+mv data8.bin data8.bin.gz
+gzip -d data8.bin.gz
+file *
+cat data8.bin
+exit
+```
+password for level 13: 
+```
+wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw
+```
+## Level 13
+The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on.  
+
+After obtaining 'sshkey.private' from`ls`, we connect to the server using `ssh -i sshkey.private bandit14@localhost -p 2220` and read the given address using `cat` command.  
+
+### Commands:
+```
+ls
+ssh -i sshkey.private bandit14@bandit.labs.overthewire.org -p 2220
+cat /etc/bandit_pass/bandit14
+```
+password for level 14: 
+```
+fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
+```
+## Level 14
+The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
+arbitrary TCP and UDP connections and listens
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
