@@ -145,5 +145,45 @@ EN632PlfYiZbn3PhVK3XOGSlNInNE00t
 ```
 ## Level 9
 The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.  
+`strings <filename>` command shows all the printable characters in the file.  
+`grep "pattern"` prints each line that matches the pattern.  
+### Commands: 
+```
+ssh bandit9@bandit.labs.overthewire.org -p 2220
+ls
+strings data.txt|grep ===
+exit
+```
+password for level 10: 
+```
+G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s
+```
+## Level 10
+The password for the next level is stored in the file data.txt, which contains base64 encoded data.  
+`base64 -d` decodes the data in the file
+### Commands: 
+```
+ls
+cat data.txt|base64 -d
+exit
+```
+password for level 11:
+```
+6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM
+```
+## Level 11
+The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions
+`tr` command translates characters. It takes two sets as inputs, plus an input stream.  
+It then takes and looks up each character in the input stream using the first set, and replaces it with the character in the second set at the same position.
+### Commands:
+```
+ls
+cat data.txt | tr '[A-Za-z]' '[N-ZA-Mn-za-m]'
+```
+password for level 12: 
+```
+JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
+```
+
 
 
