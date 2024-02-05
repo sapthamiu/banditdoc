@@ -279,6 +279,7 @@ The openssl program is a command line program for using the various cryptography
 ### Commands:
 ```
 openssl s_client -connect localhost:30001
+jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt
 ```
 password for level 16:
 ```
@@ -286,6 +287,27 @@ JQttfApK4SeyHwDlI9SXGR50qclOAil1
 ```
 ## Level 16
 The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
+
+`nmap` scans networks and ports.  
+All these ports have a server listening on them.  
+PORT      STATE SERVICE
+31046/tcp open  unknown
+31518/tcp open  unknown
+31691/tcp open  unknown
+31790/tcp open  unknown
+31960/tcp open  unknown
+Next we try to connect to each of the above ports with  
+`openssl s_client -connect localhost:<port>`
+31046 shows 'Secure regotiation is not supported'
+31518 asks for the password but sends it back
+31691 shows 'Secure renegotiation is not supported'
+31790 asks for the password and returns an RSA PRIVATE KEY, which is the required port.  
+```
+nmap localhost -p31000-32000
+openssl s_client -connect localhost:<31046>
+
+
+```
 
 
 
