@@ -3,7 +3,7 @@ This repository contains writeup for helping in solving bandits- by Sapthami
 
 ## Level 0
 `ssh` is used for remote login into a server. It can login into different port numbers deployed on a server and it will act as a client to that server.  
-`ls` shows the list of available files  
+`ls` shows the list of available files and directories.  
 `file <filename>` shows the type of file  
 `cat <filename>` shows the content of the file  
 ### Commands: 
@@ -259,16 +259,33 @@ password for level 14:
 fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
 ```
 ## Level 14
-The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
+The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.  
 The Netcat (nc) command is a command-line utility for reading and writing data between two computer networks.  
 `nc <hostname> <port>`   
 `<shell prompt from host>`
-### Command
+### Commands:
 ```
-
-
-
+nc localhost 30000
+fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
+```
+password for level 15:
+```
 jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt
+```
+## Level 15
+The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption. 
+The openssl program is a command line program for using the various cryptography functions of OpenSSL's crypto library from the shell.
+`openssl s_client -connect <hostname>:<port>`
+### Commands:
+```
+openssl s_client -connect localhost:30001
+```
+password for level 16:
+```
+JQttfApK4SeyHwDlI9SXGR50qclOAil1
+```
+## Level 16
+The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
 
 
 
