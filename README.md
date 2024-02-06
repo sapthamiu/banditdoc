@@ -318,8 +318,12 @@ openssl s_client -connect localhost:31046
 openssl s_client -connect localhost:31518
 openssl s_client -connect localhost:31691
 openssl s_client -connect localhost:31790
-
-
+mkdir /tmp/randomsshkey
+cd /tmp/randomsshkey
+touch private16.key
+ls
+cat>>private16.key
+<insert the rsa private 
 
 ```
 
