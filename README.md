@@ -163,6 +163,7 @@ The password for the next level is stored in the file data.txt, which contains b
 `base64 -d` decodes the data in the file
 ### Commands: 
 ```
+ssh bandit10@bandit.labs.overthewire.org -p 2220
 ls
 cat data.txt|base64 -d
 exit
@@ -177,8 +178,10 @@ The password for the next level is stored in the file data.txt, where all lowerc
 It then takes and looks up each character in the input stream using the first set, and replaces it with the character in the second set at the same position.
 ### Commands:
 ```
+ssh bandit11@bandit.labs.overthewire.org -p 2220
 ls
 cat data.txt | tr '[A-Za-z]' '[N-ZA-Mn-za-m]'
+exit
 ```
 password for level 12: 
 ```
@@ -186,6 +189,7 @@ JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
 ```
 ## Level 12
 The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir.  
+
 First we make a directory '/tmp/tempo' and copy the file data.txt into the directory using `cp <source filename> <destination folder>` command.  
 Then we enter the directory using `cd <foldername>` command.  
 Then we move(rename) the file using `mv <source filename> <new filename>` command so it is easier to operate on the file contents.  
@@ -205,6 +209,7 @@ Repeat until password is retrieved.
 
 ## Commands:
 ```
+ssh bandit12@bandit.labs.overthewire.org -p 2220
 mkdir /tmp/tempo
 cp data.txt /tmp/tempo
 cd /tmp/tempo
@@ -250,6 +255,7 @@ After obtaining 'sshkey.private' from`ls`, we connect to the server using `ssh -
 
 ### Commands:
 ```
+ssh bandit13@bandit.labs.overthewire.org -p 2220
 ls
 ssh -i sshkey.private bandit14@bandit.labs.overthewire.org -p 2220
 cat /etc/bandit_pass/bandit14
@@ -265,8 +271,10 @@ The Netcat (nc) command is a command-line utility for reading and writing data b
 `<shell prompt from host>`
 ### Commands:
 ```
+ssh bandit14@bandit.labs.overthewire.org -p 2220
 nc localhost 30000
 fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
+exit
 ```
 password for level 15:
 ```
@@ -278,8 +286,10 @@ The openssl program is a command line program for using the various cryptography
 `openssl s_client -connect <hostname>:<port>`
 ### Commands:
 ```
+ssh bandit15@bandit.labs.overthewire.org -p 2220
 openssl s_client -connect localhost:30001
 jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt
+exit
 ```
 password for level 16:
 ```
@@ -289,7 +299,7 @@ JQttfApK4SeyHwDlI9SXGR50qclOAil1
 The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
 
 `nmap` scans networks and ports.  
-All these ports have a server listening on them.  
+All these ports have a server listening on them:   
 PORT      STATE SERVICE
 31046/tcp open  unknown
 31518/tcp open  unknown
@@ -304,7 +314,11 @@ Next we try to connect to each of the above ports with
 31790 asks for the password and returns an RSA PRIVATE KEY, which is the required port.  
 ```
 nmap localhost -p31000-32000
-openssl s_client -connect localhost:<31046>
+openssl s_client -connect localhost:31046
+openssl s_client -connect localhost:31518
+openssl s_client -connect localhost:31691
+openssl s_client -connect localhost:31790
+
 
 
 ```
