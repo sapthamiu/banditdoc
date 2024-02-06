@@ -312,7 +312,9 @@ Next we try to connect to each of the above ports with
 31518 asks for the password but sends it back
 31691 shows 'Secure renegotiation is not supported'
 31790 asks for the password and returns an RSA PRIVATE KEY, which is the required port.  
+### Commands: 
 ```
+ssh bandit16@bandit.labs.overthewire.org -p 2220
 nmap localhost -p31000-32000
 openssl s_client -connect localhost:31046
 openssl s_client -connect localhost:31518
@@ -323,7 +325,8 @@ cd /tmp/randomsshkey
 touch private16.key
 ls
 cat>>private16.key
-<insert the rsa private 
+<insert the rsa private key>
+
 
 ```
 
