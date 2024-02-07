@@ -355,13 +355,46 @@ VwOSWtCA7lRKkTfbr2IDh6awj9RNZM5e
 ## Level 17
 There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new
 
- `diff` command compares files line by line.  
+ `diff <file1> <file2>` command compares files line by line.  
+ We get two lines which are different in the two files: `p6ggwdNHncnmCNxuAt0KtKVq185ZU7AW` and `hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg`, first one being present in file 1 and second one in file2.  (To confirm, we can ue the `grep "text"` command piped with cat command.)  
+ 
  
 ### Commands:
 ```
 ssh bandit17@bandit.labs.overthewire.org -p 2220
 ls
 diff passwords.old passwords.new
+cat passwords.new | grep "p6ggwdNHncnmCNxuAt0KtKVq185ZU7AW"
+cat passwords.new | grep "hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg"
+exit
+```
+password for level 18: 
+```
+hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg
+```
+## Level 18
+The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
+
+When we try to login as usual, we get a "Byebye!" message and get logged out.  
+From the ssh man page, we get to know about an option `-t` which forces a pseudo terminal allocation. Pseudo terminal allows programs to interact with users as if they're running on a real terminal, even if they're not; ssh is a pseudo terminal.  
+`ssh bandit -t bandit18@bandit.labs.overthewire.org -p 2220 ls` shows the file 'readme' before closing the terminal and `ssh bandit -t bandit18@bandit.labs.overthewire.org -p 2220 cat readme` shows the required password.  
+
+
+### Commands:
+```
+ssh bandit18@bandit.lab.overthewire.org -p 2220
+man ssh
+ssh bandit -t bandit18@bandit.labs.overthewire.org -p 2220 ls
+ssh bandit -t bandit18@bandit.labs.overthewire.org -p 2220 cat readme
+```
+password for level 19:
+```
+awhqfNnAbc1naukrpqDYcF95h7HoMTrC
+```
+## Level 19
+To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
+
+
 
 
 
