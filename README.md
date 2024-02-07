@@ -312,6 +312,22 @@ Next we try to connect to each of the above ports with
 31518 asks for the password but sends it back
 31691 shows 'Secure renegotiation is not supported'
 31790 asks for the password and returns an RSA PRIVATE KEY, which is the required port.  
+We store the key in a file in the tmp directory.  
+To read the key into the file, any text editor can be used.  
+I have used vim for which we type `vim <filename>` and then press 'i' to enter into inserting mode. After typing, we press 'esc' to stop inserting.  
+Then type `:wq` to save and exit the file.  (`:qa!` to exit without saving)  
+Then when we try to connect to the next level with the private key, we get an error message saying 'Permissions 0664 for 'private16.key' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+Load key "private16.key": bad permissions
+bandit17@bandit.labs.overthewire.org: Permission denied (publickey).'
+Which means we will have to change the permissions of the private key file.  
+`chmod 400<filename>` gives the user read permission, and removes all other permissions.  
+To store the password of level 17, we read the file '/etc/bandit_pass/bandit17'
+password for level 17: 
+```
+VwOSWtCA7lRKkTfbr2IDh6awj9RNZM5e
+```
 ### Commands: 
 ```
 ssh bandit16@bandit.labs.overthewire.org -p 2220
@@ -324,11 +340,31 @@ mkdir /tmp/randomsshkey
 cd /tmp/randomsshkey
 touch private16.key
 ls
-cat>>private16.key
+vim private16.key
+i
 <insert the rsa private key>
-
-
+<press escape>
+:wq
+ssh -i private16.key bandit17@bandit.labs.overthewire.org -p 2220
+chmod 400 private16.key
+ssh -i private16.key bandit17@bandit.labs.overthewire.org -p 2220
+cat /etc/bandit_pass/bandit17
+exit
 ```
+## Level 17
+There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new
+
+ `diff` command compares files line by line.  
+ 
+### Commands:
+```
+ssh bandit17@bandit.labs.overthewire.org -p 2220
+ls
+diff passwords.old passwords.new
+
+
+
+
 
 
 
